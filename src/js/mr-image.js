@@ -37,6 +37,10 @@ app.directive('mrImage', function() {
 
                         element.css('width', scope.scaleValue(scope.width, scope.scale) + 'px');
                         element.css('height', scope.scaleValue(scope.height, scope.scale) + 'px');
+                        // fix for IE: {{scaleValue(height,scale)}} does not properly resolve for IE
+                        // this fix requires jQuery so element.find can find the correct element
+                        element.find('[mr-image-selector]').css('height', scope.scaleValue(scope.height, scope.scale) + 'px');
+                        element.find('[mr-image-selector]').css('width', scope.scaleValue(scope.width, scope.scale) + 'px');
                     });
                 };
                 scope.image.src = src;
